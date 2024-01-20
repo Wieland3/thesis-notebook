@@ -4,7 +4,7 @@ import soundfile as sf
 from src.time_noise_gate import TimeNoiseGate
 
 
-def run_and_save_prediction(model_name, vocals, clean_sources, use_noise_gate, threshold, song_name):
+def run_and_save_prediction(model_name, vocals, clean_sources, use_noise_gate, threshold, song_name, n_seconds=None):
     """
     Function for predicting a song
     :param model_name: Name of model to use
@@ -13,8 +13,13 @@ def run_and_save_prediction(model_name, vocals, clean_sources, use_noise_gate, t
     :param use_noise_gate: Boolean if noise gate as post processing should be used
     :param threshold: Threshold for that noise gate
     :param song_name: Name to save predicted song under
+    :param n_seconds: If only first N seconds of song should be used for previewing results.
     :return: None
     """
+
+    if n_seconds:
+        vocals.sig = vocals.sig[:n_seconds * vocals.sr]
+        clean_sources = clean_sources[:n_seconds * vocals.sr]
 
     exploited = False
     X = vocals.sig
