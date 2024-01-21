@@ -6,6 +6,19 @@ import numpy as np
 from src import constants
 
 
+def select_preview_snippet(audio, start, end):
+    """
+    Selects preview snippet for the audio. If start and end is None, original audio returns.
+    :param audio: Audio to operate on
+    :param start: Start in seconds
+    :param end: End in seconds
+    :return: Snipped from audio between start:end
+    """
+    if start and end:
+        audio.sig = audio.sig[start * audio.sr:end * audio.sr]
+    return audio
+
+
 def stereo_to_mono(audio_stereo):
     """
     Converts a stereo audio signal to mono by averaging the channels.
