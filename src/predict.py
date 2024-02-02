@@ -4,9 +4,9 @@ from src import constants
 from src import audio_utils
 
 
-def song_data_generator(song, vocal):
+def sample_generator(song, vocal):
     """
-    Data generator for a song
+    Sample generator
     :param song: song to operate one
     :param vocal: vocal to operate on
     :return: yields the chunks from the song
@@ -56,7 +56,7 @@ def predict_song(X, exploited, model_name):
     if X.ndim == 1:
         X = np.expand_dims(X, axis=-1)
 
-    for i, (X_chunk, _) in enumerate(song_data_generator(X, X)):
+    for i, (X_chunk, _) in enumerate(sample_generator(X, X)):
         X_chunk_batch = np.expand_dims(X_chunk, axis=0)
         y_pred_chunk = model.predict(X_chunk_batch)['vocals']
         y_pred_chunk = y_pred_chunk.squeeze(0)
