@@ -14,7 +14,7 @@ def run_and_save_prediction(model_name, vocals, clean_sources, use_noise_gate, t
     :param use_noise_gate: Boolean if noise gate as post processing should be used
     :param threshold: Threshold for that noise gate
     :param song_name: Name to save predicted song under
-    :return: None
+    :return: Pya asig for prediction
     """
 
     exploited = False
